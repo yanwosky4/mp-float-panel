@@ -1,3 +1,10 @@
+<view>
+    <image style="width: 100%" src="https://picx.zhimg.com/70/v2-3b4fc7e3a1195a081d0259246c38debc_1440w.avis?source=172ae18b&biz_tag=Post"/>
+    <image style="width: 100%" src="https://picx.zhimg.com/70/v2-3b4fc7e3a1195a081d0259246c38debc_1440w.avis?source=172ae18b&biz_tag=Post"/>
+    <image style="width: 100%" src="https://picx.zhimg.com/70/v2-3b4fc7e3a1195a081d0259246c38debc_1440w.avis?source=172ae18b&biz_tag=Post"/>
+    <image style="width: 100%" src="https://picx.zhimg.com/70/v2-3b4fc7e3a1195a081d0259246c38debc_1440w.avis?source=172ae18b&biz_tag=Post"/>
+    <image style="width: 100%" src="https://picx.zhimg.com/70/v2-3b4fc7e3a1195a081d0259246c38debc_1440w.avis?source=172ae18b&biz_tag=Post"/>
+</view>
 <float-panel
     id='nestedScrollerFloatPanel'
     screenHeight="{{screenHeight}}"
