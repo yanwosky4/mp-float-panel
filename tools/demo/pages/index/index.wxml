@@ -1,1 +1,9 @@
-<comp></comp>
+<float-panel
+    id='nestedScrollerFloatPanel'
+    screenHeight="{{screenHeight}}"
+    popupHeight="{{popupHeight}}"
+    POPUP_TOP_TRANS_Y="{{POPUP_TOP_TRANS_Y}}"
+    popupInitTransY="{{popupInitTransY}}"
+    isReady="{{popupReady}}"
+    onChangeStatus="{{onPopupStatusChange}}"
+/>

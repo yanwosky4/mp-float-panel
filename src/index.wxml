@@ -1,2 +1,16 @@
-<view class="index other">{{prop}}-{{flag}}</view>
-<other></other>
+<wxs module="moveModule" src="./index.wxs"></wxs>
+<view
+    id="popupContainerWithPopup"
+    class="popupContainerWithPopup"
+    data-screenHeight="{{screenHeight}}"
+    data-popupHeight="{{popupHeight}}"
+    data-POPUP_TOP_TRANS_Y="{{POPUP_TOP_TRANS_Y}}"
+    data-popupInitTransY="{{popupInitTransY}}"
+    style="height: {{popupHeight}}px; transform: translateY({{popupInitTransY}}px); position: absolute; top: 0; left: {{left}}; width: 100vw; z-index: 999; background-color: white; border-top-left-radius: 40rpx; border-top-right-radius: 40rpx;box-shadow: 0px 1px 8px 0px rgba(0, 0, 0, 0.06);"
+    bindtouchstart="{{moveModule.touchstart}}"
+    bindtouchmove="{{moveModule.touchmove}}"
+    bindtouchend='{{moveModule.touchend}}'
+    bindtouchcancel="{{moveModule.touchend}}"
+>
+    <slot/>
+</view>

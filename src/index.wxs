@@ -1,0 +1,95 @@
+var screenHeight = 0
+var popupHeight = 0
+var POPUP_TOP_TRANS_Y = 0
+var popupInitTransY = 0
+var popupTransY = 0
+
+var startY = 0
+var isPopupUpward = false
+
+var moveElmSelector = '.popupContainerWithPopup'
+
+var isInit = false
+
+function clamp(val, min, max) {
+  return Math.min(Math.max(val, min), max)
+}
+
+function getDataSetValue(dataSet, rawKey) {
+  var key = rawKey.toLowerCase()
+  return dataSet[key]
+}
+
+function touchstart(event, ins) {
+  var touch = event.touches[0] || event.changedTouches[0]
+  startY = touch.pageY
+  // ins.callMethod('touchstart', {})
+  var dataSet = ins.selectComponent(moveElmSelector).getDataset()
+  if (dataSet && !isInit) {
+    isInit = true
+    screenHeight = getDataSetValue(dataSet, 'screenHeight')
+    popupHeight = getDataSetValue(dataSet, 'popupHeight')
+    POPUP_TOP_TRANS_Y = getDataSetValue(dataSet, 'POPUP_TOP_TRANS_Y')
+    popupInitTransY = getDataSetValue(dataSet, 'popupInitTransY')
+    popupTransY = popupInitTransY
+  }
+}
+function touchmove(event, ins) {
+  var touch = event.touches[0] || event.changedTouches[0]
+  var pageY = touch.pageY
+  var deltaY = pageY - startY
+  startY = pageY
+  if (deltaY) { // 过滤掉deltaY为0的情况
+    // deltaY < 0，往上滑动
+    isPopupUpward = deltaY < 0
+  }
+
+  var curPosition = popupTransY
+  // 只能在 [POPUP_TOP_TRANS_Y, screenHeight] 之间移动
+  var destination = clamp(curPosition + deltaY, POPUP_TOP_TRANS_Y, screenHeight)
+  // var top = pageY - startY + lastTop
+  if (curPosition === destination) return
+  popupTransY = destination
+  ins.selectComponent(moveElmSelector).setStyle({
+    transform: 'translateY(' + popupTransY + 'px)'
+  })
+}
+
+function popupScrollTo(transY, ins) {
+  popupTransY = transY
+  ins.selectComponent(moveElmSelector).setStyle({
+    transform: 'translateY(' + popupTransY + 'px)',
+    transition: 'transform 0.2s ease',
+  })
+  // const popupStatus = (toValue === POPUP_TOP_TRANS_Y) ? PopupStatusEnum.Full : PopupStatusEnum.Min
+  ins.callMethod('onChangeTransY', {
+    transY: popupTransY,
+  })
+}
+
+function touchend(event, ins) {
+  if (popupTransY <= POPUP_TOP_TRANS_Y) {
+    popupScrollTo(POPUP_TOP_TRANS_Y, ins)
+  } else if (popupTransY >= popupInitTransY) {
+    popupScrollTo(popupInitTransY, ins)
+  }
+  if (!isPopupUpward) { // 下滑
+    if (popupTransY >= screenHeight / 3) {
+      popupScrollTo(popupInitTransY, ins) // 定位到底部
+    } else {
+      popupScrollTo(POPUP_TOP_TRANS_Y, ins)
+    }
+    return
+  }
+  // 上滑
+  if (popupTransY < (screenHeight * 2 / 3)) {
+    popupScrollTo(POPUP_TOP_TRANS_Y, ins) // 定位到顶部
+  } else {
+    popupScrollTo(popupInitTransY, ins)
+  }
+}
+module.exports = {
+  touchstart: touchstart,
+  touchmove: touchmove,
+  touchend: touchend
+}
