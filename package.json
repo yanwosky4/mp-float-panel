@@ -1,5 +1,5 @@
 {
-  "name": "float-panel",
+  "name": "mp-float-panel",
   "version": "0.0.1",
   "description": "",
   "main": "miniprogram_dist/index.js",
