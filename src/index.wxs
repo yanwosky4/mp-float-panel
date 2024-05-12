@@ -21,7 +21,7 @@ function getDataSetValue(dataSet, rawKey) {
 }
 
 function touchstart(event, ins) {
-  event.preventDefault()
+  // event.preventDefault()
   var touch = event.touches[0] || event.changedTouches[0]
   startY = touch.pageY
   // ins.callMethod('touchstart', {})
@@ -36,7 +36,7 @@ function touchstart(event, ins) {
   }
 }
 function touchmove(event, ins) {
-  event.preventDefault()
+  // event.preventDefault()
   var touch = event.touches[0] || event.changedTouches[0]
   var pageY = touch.pageY
   var deltaY = pageY - startY
@@ -70,7 +70,7 @@ function popupScrollTo(transY, ins) {
 }
 
 function touchend(event, ins) {
-  event.preventDefault()
+  // event.preventDefault()
   if (popupTransY <= POPUP_TOP_TRANS_Y) {
     popupScrollTo(POPUP_TOP_TRANS_Y, ins)
   } else if (popupTransY >= popupInitTransY) {
