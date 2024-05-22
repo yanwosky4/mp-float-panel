@@ -8,7 +8,7 @@ Page({
     screenHeight,
     popupHeight,
     POPUP_TOP_TRANS_Y,
-    popupInitTransY: POPUP_TOP_TRANS_Y,
+    popupInitTransY: screenHeight - 100,
     popupReady: true,
   },
   onShow() {
