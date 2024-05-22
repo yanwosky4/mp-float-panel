@@ -7,10 +7,10 @@
     data-POPUP_TOP_TRANS_Y="{{POPUP_TOP_TRANS_Y}}"
     data-popupInitTransY="{{popupInitTransY}}"
     style="height: {{popupHeight}}px; transform: translateY({{popupInitTransY}}px); left: {{left}};"
-    bindtouchstart="{{moveModule.touchstart}}"
-    bindtouchmove="{{moveModule.touchmove}}"
-    bindtouchend='{{moveModule.touchend}}'
-    bindtouchcancel="{{moveModule.touchend}}"
+    catchtouchstart="{{moveModule.touchstart}}"
+    catchtouchmove="{{moveModule.touchmove}}"
+    catchtouchend='{{moveModule.touchend}}'
+    catchtouchcancel="{{moveModule.touchend}}"
 >
     <slot/>
 </view>
